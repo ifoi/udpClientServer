@@ -1,5 +1,6 @@
 import socket
 import sys
+import signal
 
 bufferSize = 4096
 
@@ -24,7 +25,8 @@ PORT = int(sys.argv[2])
 
 print("port number is %d" % PORT)
 
-msg = serverIP  # extend to include port number
+msg = "The server ip address is : " + \
+    str(serverIP)  # extend to include port number
 
 
 # send message to server
@@ -33,7 +35,7 @@ client_socket.sendto(msg.encode("utf-8"), (serverIP, PORT))
 
 # recieve message from server
 data, addr = client_socket.recvfrom(bufferSize)
-print("Server reponds with")
-print(str(data))
+print("Server reponds with :")
+print(str(data.decode("utf-8")))
 
 client_socket.close()

@@ -1,4 +1,4 @@
 
 
-import client from client
-import server from server
+from .client import client
+from .server import server
