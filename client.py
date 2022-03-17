@@ -3,6 +3,17 @@ import sys
 
 bufferSize = 4096
 
+
+def handler(signum, frame):
+    response = input("Ctrl-c was pressed. Do you really want to exit? y/n ")
+    if response == "y":
+        exit(1)
+
+
+# add keyboard interupt handler
+signal.signal(signal.SIGINT, handler)
+
+
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 # get ip of server and port number from command argumentsr
