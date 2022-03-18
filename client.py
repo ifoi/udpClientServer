@@ -11,31 +11,38 @@ def handler(signum, frame):
         exit(1)
 
 
-# add keyboard interupt handler
+# add keyboard interupt handler for POSIX systems
 signal.signal(signal.SIGINT, handler)
 
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
+# set 5 second timeout on client socket
+client_socket.settimeout(5)
+
 # get ip of server and port number from command argumentsr
 
 # def client(server_ip, port):
+
 serverIP = sys.argv[1]
-PORT = int(sys.argv[2])
+msg = sys.argv[2]
 
-print("port number is %d" % PORT)
+# TODO  refactor to get input from user
 
-msg = "The server ip address is : " + \
-    str(serverIP)  # extend to include port number
+PORT = 12345  # intinput("Enter the port number to connect to :")
 
+# print("port number is %d" % PORT)
 
 # send message to server
+try:
+    client_socket.sendto(msg.encode("utf-8"), (serverIP, PORT))
 
-client_socket.sendto(msg.encode("utf-8"), (serverIP, PORT))
-
-# recieve message from server
-data, addr = client_socket.recvfrom(bufferSize)
-print("Server reponds with :")
-print(str(data.decode("utf-8")))
+    # recieve message from server
+    data, addr = client_socket.recvfrom(bufferSize)
+    print("Server reponded with :")
+    print(str(data.decode("utf-8")))
+except socket.timeout as e:
+    print(e + " :Error did not recieving message from server: ")
+    sys.exit(1)
 
 client_socket.close()
