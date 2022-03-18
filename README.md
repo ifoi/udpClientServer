@@ -1,7 +1,9 @@
 ### udpClientServer
 
 
-Curretnly to start the server run  " ` server.py ` "    and " `client.py  127.0.0.1   <text> ` "  
+Curretnly to start the server run  " ` server.py ` "    and
+ 
+ " `client.py  127.0.0.1   <text> ` "   to start the client
   
   
   TODO: 
