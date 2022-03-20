@@ -1,21 +1,15 @@
 import socket
 import sys
-import signal
 
 bufferSize = 4096
 
-serverIP = sys.argv[1]
-msg = sys.argv[2]
+# to run client as standalone client, without using the main runner udpchallenge.py
+# 1. uncomment the last line " startClient() "
+# 2) and the two lines below that start with "serverIP"  and "msg"
 
-
-def handler(signum, frame):
-    response = input("Ctrl-c was pressed. Do you really want to exit? y/n ")
-    if response == "y":
-        exit(1)
-
-
-# add keyboard interupt handler for POSIX systems
-signal.signal(signal.SIGINT, handler)
+# get ip of server and port number from command arguments
+# serverIP = sys.argv[1]
+# msg = sys.argv[2]
 
 
 def startClient(serverIP, msg):
@@ -24,14 +18,7 @@ def startClient(serverIP, msg):
     # set 5 second timeout on client socket
     client_socket.settimeout(5)
 
-    # get ip of server and port number from command argumentsr
-
-    # def client(server_ip, port):
-
-    # serverIP = sys.argv[1]
-    # msg = sys.argv[2]
-
-    # TODO  refactor to get input from user
+    # TODO  refactor to promt get Port and ServerIP and from user
 
     PORT = 12345
 
@@ -50,4 +37,4 @@ def startClient(serverIP, msg):
     client_socket.close()
 
 
-startClient(serverIP, msg)
+#startClient(serverIP, msg)
