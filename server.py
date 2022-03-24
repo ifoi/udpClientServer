@@ -6,7 +6,7 @@ import sys
 # 1. uncomment the last line " startServer() "
 
 
-# Handler function system to only works on Unix based systems
+# Handler function seems to only works on Unix based systems
 def handler(signum, frame):
     response = input("Ctrl-c was pressed. Do you really want to exit? y/n ")
     if response == "y":
