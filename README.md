@@ -13,4 +13,3 @@ TODO:
 
 - ~~currently working on inttegrating them into udpClientServer.py so that both client and server can be started from that one file.~~
 - Implement tests
-  ~~This text is struckthrough.~~
