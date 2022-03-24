@@ -23,6 +23,20 @@ bufferSize = 4096
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 
+def validateInput(clientInput):
+    try:
+        int(clientInput)  # checks if input is a number
+        msg = str(int(clientInput) * 2)
+    except ValueError:
+        try:  # check if input is a float
+            float(clientInput)
+            msg = str(float(clientInput) * 2)
+        except ValueError:
+            msg = "Error: input must be a number"
+
+    return msg
+
+
 def sendReceiveData():
 
     while True:
@@ -31,15 +45,9 @@ def sendReceiveData():
             data, addr = server_socket.recvfrom(bufferSize)
             print("recieved from client: " + str(data.decode("utf-8")))
             clientInput = str(data.decode("utf-8"))
-            try:
-                int(clientInput)  # checks if input is a number
-                msg = str(int(clientInput) * 2)
-            except ValueError:
-                try:  # check if input is a float
-                    float(clientInput)
-                    msg = str(float(clientInput) * 2)
-                except ValueError:
-                    msg = "Error: input must be a number"
+
+            msg = validateInput(clientInput)
+
             server_socket.sendto(msg.encode("utf-8"), addr)
     # catches Ctr-c or keyboard interrrupt
         except KeyboardInterrupt:
@@ -59,7 +67,7 @@ def startServer():
 
     print("  *** UDP server started ***  \n *********** \n use Ctrl-c to exit the program!! ")
 
-    # recieved data from client and send back reply
+    # recieve data from client and send back reply
     sendReceiveData()
 
 
